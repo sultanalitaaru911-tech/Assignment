@@ -1,0 +1,65 @@
+<mxfile host="Electron">
+  <diagram id="hostel-uml" name="Smart Hostel Management">
+    <mxGraphModel dx="1981" dy="2483" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="customer" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=220;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeWidth=1.5;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;" value="&lt;b&gt;Customer&lt;/b&gt;&lt;hr&gt;- customerId: int&lt;br&gt;- fullName: String&lt;br&gt;- email: String&lt;br&gt;- phone: String&lt;hr&gt;+ register(): void&lt;br&gt;+ bookRoom(): void&lt;br&gt;+ makePayment(): void" vertex="1">
+          <mxGeometry height="220" width="250" x="330" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="booking" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=210;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeWidth=1.5;fillColor=#fff2cc;swimlaneFillColor=#ffffff;strokeColor=#d6b656;" value="&lt;b&gt;Booking&lt;/b&gt;&lt;hr&gt;- bookingId: int&lt;br&gt;- bookingDate: Date&lt;br&gt;- checkInDate: Date&lt;br&gt;- checkOutDate: Date&lt;br&gt;- status: String&lt;hr&gt;+ createBooking(): void&lt;br&gt;+ cancelBooking(): void" vertex="1">
+          <mxGeometry height="210" width="270" x="560" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="payment" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=200;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeWidth=1.5;fillColor=#e1d5e7;swimlaneFillColor=#ffffff;strokeColor=#9673a6;" value="&lt;b&gt;Payment&lt;/b&gt;&lt;hr&gt;- paymentId: int&lt;br&gt;- amount: double&lt;br&gt;- paymentDate: Date&lt;br&gt;- paymentMethod: String&lt;br&gt;- status: String&lt;hr&gt;+ processPayment(): void&lt;br&gt;+ generateReceipt(): void" vertex="1">
+          <mxGeometry height="200" width="280" x="315" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="maintenance" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=200;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeWidth=1.5;fillColor=#ffe6cc;swimlaneFillColor=#ffffff;strokeColor=#d79b00;" value="&lt;b&gt;MaintenanceRequest&lt;/b&gt;&lt;hr&gt;- requestId: int&lt;br&gt;- description: String&lt;br&gt;- requestDate: Date&lt;br&gt;- status: String&lt;hr&gt;+ submitRequest(): void&lt;br&gt;+ updateStatus(): void" vertex="1">
+          <mxGeometry height="200" width="280" x="1000" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="customer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="booking" value="makes (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="room" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="booking" value="reserved through (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="booking" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="payment" value="has (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="customer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="payment" value="makes (1 : 0..*)">
+          <mxGeometry relative="1" x="0.0012" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="customer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="maintenance" value="submits (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="room" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="maintenance" value="concerns (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="room" value="manages (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="booking" value="oversees (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="room" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="maintenance" value="handles (1 : 0..*)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=180;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeWidth=1.5;fillColor=#f8cecc;swimlaneFillColor=#ffffff;strokeColor=#b85450;" value="&lt;b&gt;Admin&lt;/b&gt;&lt;hr&gt;- adminId: int&lt;br&gt;- fullName: String&lt;br&gt;- email: String&lt;hr&gt;+ manageRooms(): void&lt;br&gt;+ manageBookings(): void&lt;br&gt;+ viewPayments(): void" vertex="1">
+          <mxGeometry height="180" width="250" x="570" y="-340" as="geometry" />
+        </mxCell>
+        <mxCell id="d1I7znmUC9dFlkZcEO_Q-1" edge="1" parent="1" source="admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;strokeWidth=1.5;" target="room" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="-85" as="sourcePoint" />
+            <mxPoint x="1000" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="room" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=210;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeWidth=1.5;fillColor=#d5e8d4;swimlaneFillColor=#ffffff;strokeColor=#82b366;fontColor=#1A1A1A;" value="&lt;b&gt;Room&lt;/b&gt;&lt;hr&gt;- roomId: int&lt;br&gt;- roomNumber: String&lt;br&gt;- roomType: String&lt;br&gt;- price: double&lt;br&gt;- status: String&lt;hr&gt;+ checkAvailability(): boolean&lt;br&gt;+ updateStatus(): void" vertex="1">
+          <mxGeometry height="210" width="270" x="920" y="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
